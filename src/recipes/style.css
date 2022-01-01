@@ -631,7 +631,7 @@ nav #search-bar #search-btn {
   cursor: pointer;
   transition: var(--main-transtion-duration);
 }
-
+ 
 #recipes-sec #recipes-list .recipe::before {
   content: "";
   width: 2px;
@@ -673,11 +673,14 @@ nav #search-bar #search-btn {
 }
 
 #recipes-sec #recipes-list .recipe .recipe-name {
+  flex-basis: 90%;
   font-size: 1.3rem;
   text-transform: capitalize;
+  padding-right: 5px;
 }
 
 #recipes-sec #recipes-list .recipe .recipe-body i {
+  flex-basis: 10%;
   color: #a6a6b3;
   font-size: 1.05rem;
 }

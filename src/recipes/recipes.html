@@ -6,7 +6,7 @@
   <title>JS-Recipe</title>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <link rel="stylesheet" href="./style.css">
-  <script src="./script.js" defer></script>
+  <script src="./script.js" defer type="module"></script>
 </head>
 <body>
     <!-- start nav -->
@@ -132,23 +132,11 @@
     </div>
     <section id ="recipes-sec">
       <div class="container">
-          <h2 class="main-title">our meat category's recipes</h2>
+          <h2 class="main-title">our <span id="category-name">cat</span> category's recipes</h2>
 
           <div id="recipes-list">
-            
 
-
-            <div class="recipe">
-              <div class="recipe-img">
-                <img src="https:\/\/www.themealdb.com\/images\/category\/beef.png" alt="">
-              </div>
-
-              <div class="recipe-body">
-                <h3 class="recipe-name">meat</h3>
-                <i class="fas fa-heart"></i>
-              </div>
-            </div>
-           
+            <!-- recipes will rendered by power of js  -->
           </div>
 
       </div>
