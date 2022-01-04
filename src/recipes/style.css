@@ -288,7 +288,7 @@ nav #search-bar #search-btn {
 /* start single recipe desc overlay */
 
 #overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -297,13 +297,57 @@ nav #search-bar #search-btn {
   display: none;
 }
 
+#overlay.visible {
+  display: block !important;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+
+
 #overlay .container {
   background-color: rgba(255, 255, 255, 0.95);
   padding: 25px 30px;
   height: 100vh;
   overflow-y: scroll;
+  position: relative;
 }
 
+@media (max-width: 767px) {
+  #overlay .container {
+    padding-top: 60px;
+  }
+}
+#overlay #close-btn {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  background-color: var(--purble-color);
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1.1rem;
+  color: #FFF;
+  font-weight: 900;
+  cursor: pointer;
+  transition: var(--main-transtion-duration);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#overlay #close-btn:hover {
+  color: var(--orange-color);
+}
+
+@media (max-width: 767px) {
+  #overlay #close-btn {
+  top: 20px;
+  right: 25px;
+  }
+}
 #overlay #recipe-info {
   display: flex;
   align-items: center;
@@ -346,6 +390,9 @@ nav #search-bar #search-btn {
   } 
 }
 
+#overlay #recipe-info #text #recipe-name{
+  flex-basis: 60%;
+}
 
 @media (max-width: 767px) {
   #overlay #recipe-info #text #recipe-name{
@@ -366,8 +413,14 @@ nav #search-bar #search-btn {
 
   #overlay #recipe-info #text #recipe-name h2 {
     margin-bottom: 0;
+    font-size: 1.4rem;
+    font-weight: bolder;
   }
 
+}
+
+#overlay #recipe-info #text .interact-btns {
+  display: flex;
 }
 
 #overlay #recipe-info #text #recipe-name #like-btn,
@@ -431,8 +484,9 @@ nav #search-bar #search-btn {
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: 770px) {
   #overlay #recipe-info #text #recipe-details {
+    flex-basis: 40%;
     margin-right: 0;
   }
 }
@@ -447,22 +501,22 @@ nav #search-bar #search-btn {
 @media (max-width: 767px) {
   #overlay #recipe-info #recipe-details #recipe-country,
   #overlay #recipe-info #recipe-details #recipe-category {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 }
 
-#overlay #recipe-info #recipe-details #recipe-country span,
-#overlay #recipe-info #recipe-details #recipe-category span {
-  color: #FDBB2D;
-  font-weight: 700;
-}
 
 #overlay #recipe-info #recipe-details #youtube-link {
   text-decoration: none;
   color: var(--purble-color);
   font-weight: bold;
+  transition: var(--main-transtion-duration);
 }
 
+#overlay #recipe-info #recipe-details #youtube-link:hover {
+  color: var(--orange-color);
+  
+}
 
 @media (max-width: 767px) {
   #overlay #recipe-info #recipe-details #youtube-link i{
@@ -540,6 +594,9 @@ nav #search-bar #search-btn {
   border-left: 3px solid var(--purble-color);
   box-shadow: 0 2px 4px rgb(0 0 0 / 7%);
   transition: var(--main-transtion-duration);
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
 #overlay #recipe-description #recipe-ingredients #ingredients-list li:hover{
@@ -627,14 +684,14 @@ nav #search-bar #search-btn {
   position: relative;
   margin-top: 3rem;
   box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
-  padding: 10px 0 0;
+  /* padding: 10px 0 0; */
   cursor: pointer;
   transition: var(--main-transtion-duration);
 }
  
 #recipes-sec #recipes-list .recipe::before {
   content: "";
-  width: 2px;
+  width: 3px;
   height: 0px;
   position: absolute;
   left: 0;
@@ -645,7 +702,7 @@ nav #search-bar #search-btn {
 
 #recipes-sec #recipes-list .recipe::after {
   content: "";
-  width: 2px;
+  width: 3px;
   height: 0px;
   position: absolute;
   right: 0px;
@@ -670,17 +727,18 @@ nav #search-bar #search-btn {
   align-items: center;
   padding: 20px 15px;
   border-top: 1px solid #e6e6e7;
+  gap: 10px;
 }
 
 #recipes-sec #recipes-list .recipe .recipe-name {
-  flex-basis: 90%;
   font-size: 1.3rem;
   text-transform: capitalize;
-  padding-right: 5px;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
 #recipes-sec #recipes-list .recipe .recipe-body i {
-  flex-basis: 10%;
   color: #a6a6b3;
   font-size: 1.05rem;
 }

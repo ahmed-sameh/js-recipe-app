@@ -23,7 +23,7 @@ export class fetchData {
             recipes = await responseData.json();
           }
         }
-      ).catch(e => console.log('Connection error', e));;
+      ).catch(e => console.log('Connection error', e));
     }else {
       console.log('category name is null')
     }
@@ -32,11 +32,17 @@ export class fetchData {
   }
   
   static async fetchingRecipeDetailsHandler(recipeID) {
+    let recipeDetails;
     if(recipeID)
     {
-      const recipeDetails = await fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`)
+      await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`).then( async responseData => {
+        if(responseData.ok) {
+          recipeDetails = await responseData.json();
+        }
+      }).catch(e => console.log('Connection error', e));
     }else {
       console.log('recipe id is null')
     }
+    return recipeDetails;
   }
 }
