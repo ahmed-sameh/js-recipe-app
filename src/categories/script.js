@@ -1,5 +1,18 @@
 import {fetchData} from '../utilites/fetchingData.js';
 
+
+class navbar {
+  mobileButton = document.getElementById('mobile-nav-btn');
+  constructor() {
+    this.mobileButton.addEventListener('click', this.navBtnClickHandler);
+  }
+
+  navBtnClickHandler() {
+    const navItemsHook = document.querySelector('.nav-items');
+    navItemsHook.classList.toggle('nav-show');
+  }
+}
+
 class categories {
   constructor() {
     this.fetchingCategories();
@@ -58,3 +71,4 @@ class categories {
 }
 
 new categories();
+new navbar();

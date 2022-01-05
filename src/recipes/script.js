@@ -1,11 +1,25 @@
 import {fetchData} from '../utilites/fetchingData.js';
+
+
+
+class navbar {
+  mobileButton = document.getElementById('mobile-nav-btn');
+  constructor() {
+    this.mobileButton.addEventListener('click', this.navBtnClickHandler);
+  }
+
+  navBtnClickHandler() {
+    const navItemsHook = document.querySelector('.nav-items');
+    navItemsHook.classList.toggle('nav-show');
+  }
+}
 export class recipes {
 
   constructor (categoryName) {
     // this.fetchRecipesOfCategory(categoryName);
     // document.getElementById('category-name').innerText = categoryName;
-    this.fetchRecipesOfCategory('Beef');
-    document.getElementById('category-name').innerText = 'Beef';
+    this.fetchRecipesOfCategory('Breakfast');
+    document.getElementById('category-name').innerText = 'Breakfast';
     this.recipesList = document.getElementById('recipes-list');
     this.recipeClickHandler();
   }
@@ -16,7 +30,6 @@ export class recipes {
   }
 
   recipesRenderHandler(categoryMealsList) {
-    console.log(categoryMealsList)
     categoryMealsList.forEach(  meal => {
       const recipeDiv = this.recipeDivGenerator(meal);
       this.recipesList.append(recipeDiv);
@@ -147,6 +160,8 @@ class overlay {
 
 
 
+
+new navbar();
 new recipes();
 
 
@@ -166,7 +181,7 @@ new recipes();
 /*
     1- htshta8al 3la  js bta3 al overlay  <<<<<<<<<done>>>>>>>>
     
-    2-  htshta8al 3la albutton bta3 alnavbar
+    2-  htshta8al 3la albutton bta3 alnavbar <<<<<<<<<done>>>>>>>>
 
     3-  htshof fy tre2a torbt al category m3 al recipes 
 

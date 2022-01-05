@@ -161,6 +161,11 @@ nav .container{
     background-color: rgba(58, 28, 113, .98);
     padding: 15px 0;
   }
+
+  
+  .nav-items.nav-show {
+    display: flex !important;
+  }
 }
 
 .nav-items .list {
