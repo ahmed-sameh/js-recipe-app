@@ -45,4 +45,19 @@ export class fetchData {
     }
     return recipeDetails;
   }
+  
+  static async fetchingRecipeDetailsByNameHandler(recipeName) {
+    let recipeDetails;
+    if(recipeName)
+    {
+      await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeName}`).then( async responseData => {
+        if(responseData.ok) {
+          recipeDetails = await responseData.json();
+        }
+      }).catch(e => console.log('Connection error', e));
+    }else {
+      console.log('recipe id is null')
+    }
+    return recipeDetails;
+  }
 }

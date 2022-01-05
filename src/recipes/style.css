@@ -395,7 +395,7 @@ nav #search-bar #search-btn {
 }
 
 #overlay #recipe-info #text #recipe-name{
-  flex-basis: 60%;
+  flex-basis: 70%;
 }
 
 @media (max-width: 767px) {
@@ -485,6 +485,7 @@ nav #search-bar #search-btn {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  flex-basis: 30%;
 }
 
 
@@ -530,6 +531,7 @@ nav #search-bar #search-btn {
 
 #overlay #recipe-info #recipe-details #tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   list-style: none;
   color: #777;
