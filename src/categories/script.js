@@ -7,6 +7,7 @@ class navbar {
     this.mobileButton.addEventListener('click', this.navBtnClickHandler);
   }
 
+  // it toggle nav items  depend on mobile nav button click
   navBtnClickHandler() {
     const navItemsHook = document.querySelector('.nav-items');
     navItemsHook.classList.toggle('nav-show');
@@ -20,12 +21,14 @@ class categories {
     this.categoryClickHandler();
   }
 
+  // this func using fetch data module to fetch categories  and send it to categorie render method 
   async fetchingCategories () {
-    const categories = await fetchData.fetchingCategoriesHandler();
+    const categories = await fetchData.fetchingData('fetching categories');
     this.categoriesRender(categories.categories)
     
   }
 
+  /* this func will take array of categories objects and send each object to render by categoryElementRenderHandler and get back the category div element and append it to categories list ul*/
   categoriesRender(categoriesList) {
     categoriesList.forEach(categoryElementInfo => {
       const catDiv = this.categoryElementRenderHandler(categoryElementInfo);
@@ -33,6 +36,7 @@ class categories {
     });
   }
 
+  // take category object and return category div element
   categoryElementRenderHandler (categoryObj) {
     const categoryEl = document.createElement('div');
     categoryEl.classList.add('category');
@@ -51,7 +55,7 @@ class categories {
 
   }
 
-
+  // this func will handle the click on catgory
   categoryClickHandler() {
     this.categoriesList.addEventListener("click", event => {
       // console.log(event.target.closest('.category').title);

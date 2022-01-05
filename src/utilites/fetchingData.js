@@ -1,63 +1,57 @@
 export class fetchData {
 
-  static async fetchingCategoriesHandler() {
-    let categories;
-      await fetch('https://www.themealdb.com/api/json/v1/1/categories.php').then(
-        async responseData => {
-          if(responseData.ok)
-          {
-            categories = await responseData.json();
-          }
-        }
-        ).catch(e => console.log('Connection error', e));
-        
-        return categories;
-  }
-  
-  static async fetchingRecipesHandler(categoryName) {
-    let recipes;
-    if(categoryName) {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`).then(
-        async responseData => {
-          if(responseData.ok) {
-            recipes = await responseData.json();
-          }
-        }
-      ).catch(e => console.log('Connection error', e));
-    }else {
-      console.log('category name is null')
-    }
+  /*
+    this module will recive data type that app will needed and will fetch it from api and will return the required data 
+    and it will need data type that app need and some meta data as categoryName, recipeID and recipeName and start sending http requests upon this data using fetch api 
+  */ 
 
-    return recipes;
-  }
-  
-  static async fetchingRecipeDetailsHandler(recipeID) {
-    let recipeDetails;
-    if(recipeID)
-    {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`).then( async responseData => {
-        if(responseData.ok) {
-          recipeDetails = await responseData.json();
+
+  static async fetchingData(dataType,categoryName = '', recipeID = '', recipeName = '') {
+    let fetchedData;
+    let apiURL;
+
+    switch (dataType) {
+      case 'fetching categories':
+        apiURL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+        break;
+
+      case 'fetching recipes':
+        if(categoryName) {
+          apiURL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`;
+        }else {
+          console.log('category name is null')
         }
-      }).catch(e => console.log('Connection error', e));
-    }else {
-      console.log('recipe id is null')
-    }
-    return recipeDetails;
-  }
-  
-  static async fetchingRecipeDetailsByNameHandler(recipeName) {
-    let recipeDetails;
-    if(recipeName)
-    {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeName}`).then( async responseData => {
-        if(responseData.ok) {
-          recipeDetails = await responseData.json();
+        break;
+
+      case 'fetching recipe details':
+        if(recipeID) {
+          apiURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeID}`;
+            
+        }else {
+          console.log('recipe id is null')
         }
-      }).catch(e => console.log('Connection error', e));
-    }else {
-      console.log('recipe id is null')
+        break;
+
+      case 'fetching recipe by name':
+        if(recipeName) {
+          apiURL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeName}`;
+            
+        }else {
+          console.log('recipe name is null')
+        }
+        break;
+    
+      default:
+        break;
     }
-    return recipeDetails;
+    
+    await fetch(apiURL).then( async responseData => {
+      if(responseData.ok) {
+        fetchedData = await responseData.json();
+      }
+    }).catch(e => console.log('Connection error', e));
+
+    return fetchedData;
   }
+
 }
