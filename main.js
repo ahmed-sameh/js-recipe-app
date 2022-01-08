@@ -15,19 +15,20 @@ class Navbar {
     });
 
 
-
+    // go to local storge and get meals ans send it to AppItemsRender to show it on screen
     document.getElementById('cat').addEventListener('click', () => {
-      new App();
+      const meals = JSON.parse(localStorage.getItem('meals'))
+      new AppItemsRender('category',meals,true);
     })
   }
 
-  // this fun responsible for toggle nav items on button click
+  // this func responsible for toggle nav items on button click
   navMobileBtnClickHandler() {
     const navItemsHook = document.querySelector('.nav-items');
     navItemsHook.classList.toggle('nav-show');
   }
 
-  // this fun will take the  user input in search input field and send it to fetching recipes method
+  // this func will take the  user input in search input field and send it to fetching recipes method
   searchBarHandler() {
     const requiredRecipeName = document.getElementById('search-field').value;
     this.fetchingRecipesByName(requiredRecipeName);
@@ -39,7 +40,7 @@ class Navbar {
     this.recipesRenderHandler(recipes.meals, recipeName);
   }
 
-  // will check on the recipes and send it to recipes projecting class to render it to user
+  // will check on the recipes and send it to AppItemsRender module to render it to user
   recipesRenderHandler(recipes, recipeName) {
     if(recipes) {
       new AppItemsRender('recipe', recipes, true);
@@ -50,7 +51,6 @@ class Navbar {
     }
   }
 
-  
 }
 export class App {
 
@@ -63,22 +63,22 @@ export class App {
   }
 
 
-  // this func using fetch data module to fetch categories  and send it to categorie render method 
+  // this func using fetch data module to fetch categories  and send it to AppItemsRender to render it  and store it in local storge
   async fetchingCategories () {
     const categories = await fetchData.fetchingData('fetching categories');
     if(categories) {
       this.mainHeadingHook.innerText = `our main categories`;
-      new AppItemsRender('category',categories.categories,true)
+      new AppItemsRender('category',categories.categories,true);
+      localStorage.setItem('meals',JSON.stringify(categories.categories));
     }
   }
   
   
-  // used to send to fetch data module cat name and recive the recives and check it and send it to recipes projecting method
+  // used to send request to fetchData module and recive the recipes and send it to AppItemsRender to render it
   async fetchingRecipes(categoryName) {
     const recipes = await fetchData.fetchingData('fetching recipes',categoryName);
     if(recipes) {
       this.mainHeadingHook.innerHTML = `our <span id="category-name">${categoryName}</span> category's recipes`;
-      console.log(recipes.meals);
       new AppItemsRender('recipe', recipes.meals,true)
     } else{
       document.getElementById('recipes-list').innerHTML = '';
@@ -87,7 +87,7 @@ export class App {
   }
 
 
-  // used to send clicked recipe element id to the fetch data module to get back the recipe details data and send this data to overlay class to render it to users pn screen
+  // used to send clicked recipe element id to the fetch data module to get back the recipe details data and send this data to overlay class to render it to users on screen
   async fetchingRecipeDetails(recipeID) {
     const recipeDetails = await fetchData.fetchingData('fetching recipe details','',recipeID,'');
     import('./modules/recipeDetailsRender.js').then( module => {
@@ -95,17 +95,16 @@ export class App {
     })
   }
 
-
+  //used to handle item click and know if it category or recipe and send its info to method that responsble to fetch the data
   itemElClickHandler() {
     this.itemsListHook.addEventListener('click', event => {
       const clickedElHook = event.target.closest('.list-item');
       if(clickedElHook) {
-        if(clickedElHook.classList.contains("category")) {
+        if(clickedElHook.dataset.itemType === 'category') {
           const categoryName = clickedElHook.title;
           this.fetchingRecipes(categoryName);
-        }else if(clickedElHook.classList.contains("recipe")){
+        }else if(clickedElHook.dataset.itemType === 'recipe'){
           const recipeID = clickedElHook.id;
-          console.log(recipeID);
           this.fetchingRecipeDetails(recipeID);
         }
       }
@@ -113,15 +112,6 @@ export class App {
   }
 
 }
-
-
-
-
-
-
-
-
-
 
 new Navbar();
 new App();

@@ -2,14 +2,14 @@ export class fetchData {
 
   /*
     this module will recive data type that app will needed and will fetch it from api and will return the required data 
-    and it will need data type that app need and some meta data as categoryName, recipeID and recipeName and start sending http requests upon this data using fetch api 
+    and it will required data  as categoryName, recipeID and recipeName and start sending http requests upon this data using fetch api 
   */ 
 
 
   static async fetchingData(dataType,categoryName = '', recipeID = '', recipeName = '') {
     let fetchedData;
     let apiURL;
-
+    //data type is will be category or recipe
     switch (dataType) {
       case 'fetching categories':
         apiURL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
@@ -42,6 +42,7 @@ export class fetchData {
         break;
     
       default:
+        console.log("can't detect data type you need to create");
         break;
     }
     

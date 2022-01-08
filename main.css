@@ -329,8 +329,8 @@ nav #search-bar #search-btn {
   top: 25px;
   right: 30px;
   background-color: var(--purble-color);
-  padding: 4px 6px;
-  border-radius: 6px;
+  padding: 6px 8px 4px;
+  border-radius: 50%;
   border: none;
   font-size: 1.1rem;
   color: #FFF;
@@ -342,7 +342,7 @@ nav #search-bar #search-btn {
   justify-content: center;
 }
 
-#overlay #close-btn:hover {
+#overlay #close-btn:hover i{
   color: var(--orange-color);
 }
 
@@ -640,14 +640,14 @@ nav #search-bar #search-btn {
 
 /* start recipeses section  */
 
-#app-template .container {
+#main-template .container {
   background-color: #FFF;
   box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-#app-template .main-title {
+#main-template .main-title {
   position: relative;
   display: block;
   width: fit-content;
@@ -659,7 +659,7 @@ nav #search-bar #search-btn {
   font-size: 1.7rem;
 }
 
-#app-template .main-title::before {
+#main-template .main-title::before {
   content: "";
   width: 110px;
   height: 2px;
@@ -670,7 +670,7 @@ nav #search-bar #search-btn {
   background-color: #363940;
 }
 
-#app-template .main-title::after {
+#main-template .main-title::after {
   content: "";
   width: 12px;
   height: 12px;
@@ -683,13 +683,13 @@ nav #search-bar #search-btn {
   border-radius: 50%;
 }
 
-#app-template #main-elements-list {
+#main-template #main-elements-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 40px;
 }
 
-#app-template #main-elements-list .list-item {
+#main-template #main-elements-list .list-item {
   position: relative;
   margin-top: 3rem;
   box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
@@ -698,7 +698,7 @@ nav #search-bar #search-btn {
   transition: var(--main-transtion-duration);
 }
  
-#app-template #main-elements-list .list-item::before {
+#main-template #main-elements-list .list-item::before {
   content: "";
   width: 3px;
   height: 0px;
@@ -709,7 +709,7 @@ nav #search-bar #search-btn {
   transition: var(--main-transtion-duration);
 }
 
-#app-template #main-elements-list .list-item::after {
+#main-template #main-elements-list .list-item::after {
   content: "";
   width: 3px;
   height: 0px;
@@ -720,17 +720,17 @@ nav #search-bar #search-btn {
   transition: var(--main-transtion-duration);
 }
 
-#app-template #main-elements-list .list-item:hover::before,
-#app-template #main-elements-list .list-item:hover::after {
+#main-template #main-elements-list .list-item:hover::before,
+#main-template #main-elements-list .list-item:hover::after {
   height: 100%;
 }
 
-#app-template #main-elements-list .list-item .item-img img {
+#main-template #main-elements-list .list-item .item-img img {
   max-width: 100%;
   width: 100%;
 }
 
-#app-template #main-elements-list .list-item .item-body {
+#main-template #main-elements-list .list-item .item-body {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -739,8 +739,8 @@ nav #search-bar #search-btn {
   gap: 10px;
 }
 
-#app-template #main-elements-list .list-item .item-name {
-  font-size: 1.4rem;
+#main-template #main-elements-list .list-item .item-name {
+  font-size: 1.2rem;
   font-weight: bold;
   text-transform: capitalize;
   white-space: nowrap;
@@ -748,7 +748,12 @@ nav #search-bar #search-btn {
   text-overflow: ellipsis;
 }
 
-#app-template #main-elements-list .list-item .item-body i {
+#main-template #main-elements-list .list-item .item-body i {
   color: var(--purble-color);
   font-size: 1.4rem;
+  visibility: hidden;
+  transition: var(--main-transtion-duration);
+}
+#main-template #main-elements-list .list-item:hover .item-body i {
+  visibility: visible;
 }
